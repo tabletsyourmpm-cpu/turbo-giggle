@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meta Clip! | bro actually clipped it</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#FFF6E3;--charcoal:#2B2B2B;--lime:#B5E61D;--lime-dark:#9ACD16;--muted:#6B6B6B}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Inter,sans-serif;background:var(--cream);color:var(--charcoal);line-height:1.65}
+.wrap{max-width:720px;margin:0 auto;padding:0 1.5rem}
+header{padding:1.25rem 1.5rem;display:flex;align-items:center;gap:.75rem;max-width:720px;margin:0 auto}
+.logo{width:44px;height:44px;background:var(--charcoal);color:var(--cream);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Freckle Face',cursive;font-size:1.6rem;transform:rotate(-4deg)}
+.logo-text{font-family:'Freckle Face',cursive;font-size:1.4rem}
+.hero{padding:3rem 0 2rem}.hero h1{font-family:'Freckle Face',cursive;font-size:2.8rem;line-height:1.15;margin-bottom:1.25rem}
+.hero h1 em{font-style:normal;background:var(--lime);padding:0 .35rem;border-radius:6px}
+.hero p{font-size:1.1rem;color:var(--muted);margin-bottom:.75rem}
+.btn{display:inline-block;background:var(--lime);color:var(--charcoal);font-weight:700;font-size:1.1rem;padding:.9rem 2rem;border-radius:999px;text-decoration:none;margin-top:1.25rem;transition:transform .15s,background .15s;border:0;cursor:pointer;font-family:inherit}
+.btn:hover{background:var(--lime-dark);transform:scale(1.03)}
+.meta{font-size:.85rem;color:var(--muted);margin-top:.75rem}
+section.block{padding:2.5rem 0}section.block h2{font-family:'Freckle Face',cursive;font-size:1.9rem;margin-bottom:1.25rem}
+.joke{background:var(--charcoal);color:var(--cream);border-radius:18px;padding:1.75rem;margin:1.5rem 0;transform:rotate(.5deg)}
+.joke p{font-size:1.05rem}.joke strong{color:var(--lime)}
+ul.tight{list-style:none}ul.tight li{padding:.9rem 0;border-bottom:1px solid rgba(0,0,0,.1);font-size:1.02rem}
+ul.tight li:last-child{border-bottom:none}ul.tight li strong{display:block;font-size:1.08rem}ul.tight li span{color:var(--muted)}
+.steps{counter-reset:step;list-style:none}.steps li{counter-increment:step;padding:.8rem 0 .8rem 3rem;position:relative;font-size:1.02rem}
+.steps li:before{content:counter(step);position:absolute;left:0;top:.7rem;width:2rem;height:2rem;background:var(--lime);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.95rem}
+.final{text-align:left;background:#fff;border-radius:20px;padding:2.25rem;margin:2rem 0 3rem;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.final h2{font-family:'Freckle Face',cursive;font-size:2rem;margin-bottom:.75rem}.final p{color:var(--muted);margin-bottom:.5rem}
+footer{text-align:center;padding:1.75rem;color:var(--muted);font-size:.85rem;border-top:1px solid rgba(0,0,0,.08)}
+.feedback-launcher{position:fixed;left:16px;bottom:16px;z-index:1000;border:2px solid var(--charcoal);border-radius:999px;background:var(--lime);color:var(--charcoal);padding:12px 17px;font:700 .95rem Inter,sans-serif;box-shadow:0 5px 0 var(--charcoal);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.feedback-launcher:hover{transform:translateY(-2px);box-shadow:0 7px 0 var(--charcoal)}
+.feedback-panel{position:fixed;left:16px;bottom:76px;z-index:1001;width:min(370px,calc(100vw - 32px));max-height:min(78vh,650px);overflow-y:auto;background:#fff;color:var(--charcoal);border:2px solid var(--charcoal);border-radius:20px;padding:20px;box-shadow:0 12px 38px rgba(0,0,0,.2);display:none}
+.feedback-panel.open{display:block;animation:pop-in .16s ease-out}
+@keyframes pop-in{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.feedback-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.feedback-head h2{font:1.65rem 'Freckle Face',cursive;line-height:1.1}
+.feedback-close{border:0;background:#f0f0f0;color:var(--charcoal);border-radius:50%;width:32px;height:32px;font-size:1.2rem;cursor:pointer}
+.feedback-intro{color:var(--muted);font-size:.92rem;margin-bottom:15px}
+.feedback-panel label{display:block;font-size:.88rem;font-weight:700;margin:12px 0 6px}
+.feedback-panel select,.feedback-panel textarea,.feedback-panel input{display:block;width:100%;border:1.5px solid #c9c9c9;border-radius:10px;padding:10px 11px;font:.95rem Inter,sans-serif;background:#fff;color:var(--charcoal)}
+.feedback-panel textarea{resize:vertical;min-height:115px}
+.feedback-panel select:focus,.feedback-panel textarea:focus,.feedback-panel input:focus{outline:3px solid rgba(181,230,29,.55);border-color:var(--charcoal)}
+.feedback-panel .btn{width:100%;margin-top:14px;padding:12px 16px;font-size:1rem}
+.feedback-note{font-size:.77rem;color:var(--muted);margin-top:10px}
+.feedback-status{font-size:.9rem;margin-top:10px;min-height:1.4em}.feedback-status.error{color:#a32121}.feedback-status.success{color:#236b23}
+.feedback-trap{position:absolute!important;left:-10000px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+@media(max-width:600px){.hero h1{font-size:2.2rem}.final{padding:1.5rem}.feedback-launcher{left:12px;bottom:12px}.feedback-panel{left:12px;bottom:68px;width:calc(100vw - 24px)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+<header><div class="logo">M</div><div class="logo-text">Meta Clip!</div></header>
+<div class="wrap">
+  <div class="hero">
+    <h1>bro you actually hit that <em>WHAT?!</em></h1>
+    <p>"nah bro i swear i hit that shot"<br>"sure you did 💀"</p><p>Okay then. Prove it.</p>
+    <p>Meta Clip! keeps a rolling recording of your gameplay. Something insane happens? Hit your clip button or say "meta clip that" and save the moment. No more trying to explain a clip that doesn't exist.</p>
+    <a class="btn" href="https://www.dropbox.com/scl/fi/3rqahxz93verods10l9hv/V1_1.apk?rlkey=w7m1rmof1oc83li6njlddy88i&st=v9pk9ww8&dl=1">Get Meta Clip!</a>
+    <div class="meta">Free · v1.1 · Android &amp; Quest · no account</div>
+  </div>
+  <div class="joke"><p><strong>The meme was literally the inspiration.</strong><br><br>"hey meta clip that"<br>*starts recording instead of clipping the last 30 seconds*<br><br>BRO 😭<br><br>So I made an app that actually saves the moment you wanted.</p></div>
+  <section class="block"><h2>okay but what does it do</h2><ul class="tight">
+    <li><strong>It remembers the last 30 seconds</strong><span>Start rolling before you play. The app keeps a rolling buffer so you can save what just happened instead of recording everything and hoping something cool happens.</span></li>
+    <li><strong>"meta clip that"</strong><span>Use the voice trigger to save a clip without stopping what you're doing. Perfect for those moments when your hands are busy.</span></li>
+    <li><strong>Controller buttons work too</strong><span>Prefer pressing a button? Set up a controller trigger instead. Because sometimes yelling at your headset isn't the move.</span></li>
+    <li><strong>Your clips have their own gallery</strong><span>Find the moments you've saved, check their length and when you grabbed them, then open them in a video player.</span></li>
+    <li><strong>Made for actually playing games</strong><span>The goal is to capture your gameplay without making the game feel like a slideshow. Performance can vary depending on your device and settings.</span></li>
+  </ul></section>
+  <section class="block"><h2>how do i use this thing</h2><ol class="steps">
+    <li>Download the APK and install it on your supported device.</li><li>Open Meta Clip! and set up your preferred trigger.</li><li>Start rolling, then go play whatever game you're into.</li><li>Something crazy happens? Trigger the clip and check your gallery.</li>
+  </ol><p style="color:var(--muted);margin-top:1rem">First time installing an APK? You may need to allow installation from your chosen file manager or browser. Only install APKs you trust.</p></section>
+  <div class="final"><h2>go get your clips lol</h2><p>It's free, there's no account to make, and you can finally stop arguing with your friends over whether that play actually happened.</p><p>Unless you still miss the shot. That's between you and your aim 💀</p><a class="btn" href="https://www.dropbox.com/scl/fi/3rqahxz93verods10l9hv/V1_1.apk?rlkey=w7m1rmof1oc83li6njlddy88i&st=v9pk9ww8&dl=1">Download v1.1</a></div>
+</div>
+<footer>Meta Clip! · made because "clip that" should actually clip that 😭<br><span style="font-size:.78rem">Not affiliated with Meta Platforms, Inc.</span></footer>
+
+<button class="feedback-launcher" id="feedbackOpen" type="button" aria-haspopup="dialog" aria-controls="feedbackPanel">💬 Send us something</button>
+<section class="feedback-panel" id="feedbackPanel" role="dialog" aria-modal="false" aria-labelledby="feedbackTitle" aria-hidden="true">
+  <div class="feedback-head"><h2 id="feedbackTitle">got a thought? 👀</h2><button class="feedback-close" id="feedbackClose" type="button" aria-label="Close feedback">×</button></div>
+  <p class="feedback-intro">Found a bug? Got an idea? Or just wanna tell me what you think? All of it is welcome. You don't need to write an essay. If something's annoying, confusing, broken, or actually pretty cool, I'd like to hear it.</p>
+  <form id="feedbackForm">
+    <label for="feedbackType">What's this about?</label>
+    <select id="feedbackType" name="type" required>
+      <option value="General message">Just saying something</option><option value="Suggestion">I have an idea 💡</option><option value="Bug report">Something broke 🐛</option><option value="Feedback">My opinion / feedback</option>
+    </select>
+    <label for="feedbackMessage">What's on your mind?</label>
+    <textarea id="feedbackMessage" name="message" maxlength="4000" required placeholder="Tell me what happened, what you'd change, or whatever's on your mind..."></textarea>
+    <label for="feedbackContact">Contact (optional)</label>
+    <input id="feedbackContact" name="contact" type="text" maxlength="120" placeholder="Discord username or email, if you want a reply">
+    <div class="feedback-trap" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+    <button class="btn" id="feedbackSubmit" type="submit">Send it over 🚀</button>
+    <p class="feedback-note">Your message goes to the Meta Clip! developer through this site's server. Please don't include passwords or private info.</p>
+    <p class="feedback-status" id="feedbackStatus" role="status" aria-live="polite"></p>
+  </form>
+</section>
+<script>
+(() => {
+  const openButton = document.getElementById('feedbackOpen');
+  const closeButton = document.getElementById('feedbackClose');
+  const panel = document.getElementById('feedbackPanel');
+  const form = document.getElementById('feedbackForm');
+  const submitButton = document.getElementById('feedbackSubmit');
+  const status = document.getElementById('feedbackStatus');
+
+  function setPanel(open) {
+    panel.classList.toggle('open', open);
+    panel.setAttribute('aria-hidden', String(!open));
+    if (open) document.getElementById('feedbackMessage').focus();
+    else openButton.focus();
+  }
+
+  openButton.addEventListener('click', () => setPanel(!panel.classList.contains('open')));
+  closeButton.addEventListener('click', () => setPanel(false));
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && panel.classList.contains('open')) setPanel(false);
+  });
+
+  form.addEventListener('submit', async event => {
+    event.preventDefault();
+    status.className = 'feedback-status';
+    status.textContent = '';
+    const data = {
+      type: form.type.value,
+      message: form.message.value.trim(),
+      contact: form.contact.value.trim(),
+      website: form.website.value
+    };
+    if (!data.message) {
+      status.classList.add('error');
+      status.textContent = 'Write a little something first 🙂';
+      return;
+    }
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+    try {
+      const response = await fetch('/.netlify/functions/feedback', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || 'Could not send that right now.');
+      form.reset();
+      status.classList.add('success');
+      status.textContent = 'Sent! Thanks for taking a sec to write this 💚';
+    } catch (error) {
+      status.classList.add('error');
+      status.textContent = 'Couldn’t send it just now. Try again in a bit?';
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send it over 🚀';
+    }
+  });
+})();
+</script>
+</body>
+</html>
